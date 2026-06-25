@@ -19,7 +19,7 @@ function readJson(req) {
   })
 }
 
-// 时音馆 AI 策展中间件（开发期）；部署时由 /api/curator.js 接管
+// 声音星图 AI 策展中间件（开发期）；部署时由 /api/curator.js 接管
 function curatorApiPlugin(cfg) {
   const cache = new Map() // 同一展厅生成过一次就秒回（开发期内存缓存）
   return {
