@@ -198,7 +198,7 @@ npm run build    # 生产构建
 
 ## 团队 / Author
 
-**Lier Mi** — 概念、策展、设计与前端实现。
+**Lier Mi** — 概念、策展、设计与全栈。
 📮 liermi1996@gmail.com
 
 ---
