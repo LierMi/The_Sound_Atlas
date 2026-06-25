@@ -1,0 +1,7 @@
+# 统一换行为 LF（跨平台协作时避免 CRLF 噪音）
+* text=auto eol=lf
+
+# 让 GitHub 语言统计聚焦真实代码，不被生成/废弃文件带偏
+package-lock.json   linguist-generated=true
+public/world-land.json linguist-generated=true
+*.bak.jsx           linguist-generated=true
