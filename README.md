@@ -6,7 +6,7 @@
 ### 🔗 快速入口 / Quick Links
 
 - 🌌 **音乐时空入口（在线体验）**：**https://sound-atlas-five.vercel.app**
-- 🎬 **Demo 视频**：_待录制，即将上线_
+- 🎬 **Demo 视频**：https://drive.google.com/file/d/16sf4vhFto22Mw_Kv9p7yewdSWPxvNf4y/view?usp=sharing
 - 🏆 **赛道**：TME 腾讯音乐黑客松 2026 · **赛道 A 创新音乐产品**（从 0 到 1）
 - 🤖 **关键词**：AI agent 长程自主任务 · AI 自主构建 · AI 馆长 · 沉浸式策展
 - ✅ **完成度**：可独立运行的 Web/H5，已部署上线、含真实数据与可点击商业入口
