@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #0c0b0e;
+  color: #e7e5e4;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 隐藏滚动条但保留滚动 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 入场动画：缓慢上浮，电影感 */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards;
+}
+
+/* 俯冲进入星球时的转场遮罩：暖光闪一下再淹没成黑，交接给 Loading 页 */
+@keyframes diveFade {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.dive-overlay {
+  opacity: 0;
+  animation: diveFade 0.95s cubic-bezier(0.5, 0, 0.9, 1) forwards;
+}
+
+/* 仪表盘 HUD：缓慢旋转的内刻度环 */
+@keyframes instrSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.instr-rotate {
+  transform: translate(-50%, -50%);
+  animation: instrSpin 150s linear infinite;
+}
+/* 做旧颗粒 */
+.instr-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+/* 扫描线 */
+.instr-scan {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0 2px,
+    rgba(0, 0, 0, 0.06) 2px 3px
+  );
+}
+
+/* 路线图：折线流动虚线（位移 = 3×节距 2.7 → 无缝循环） */
+@keyframes routeFlow {
+  to {
+    stroke-dashoffset: -8.1;
+  }
+}
+.route-flow {
+  animation: routeFlow 2s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-flow {
+    animation: none;
+  }
+}
+
+/* 盖章：从大到小砸下来，带回弹 */
+@keyframes stampIn {
+  0% {
+    opacity: 0;
+    transform: scale(2.6) rotate(-20deg);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(0.9) rotate(-7deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-7deg);
+  }
+}
+.stamp-in {
+  animation: stampIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes vinylSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* 正在播放：声波均衡器跳动条 */
+@keyframes eqBar {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.eq-bar {
+  transform-origin: bottom;
+  animation: eqBar 0.9s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar {
+    animation: none;
+    transform: scaleY(0.7);
+  }
+}
+
+.cosmic-starfield {
+  background-image:
+    radial-gradient(circle at 8% 18%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 16% 72%, rgba(201, 162, 75, 0.8) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 24% 34%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 31% 82%, rgba(151, 186, 205, 0.9) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 44% 16%, rgba(255, 255, 255, 0.65) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 56% 78%, rgba(201, 162, 75, 0.72) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 68% 28%, rgba(255, 255, 255, 0.82) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 81% 68%, rgba(146, 165, 214, 0.86) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 92% 22%, rgba(255, 255, 255, 0.74) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 88% 88%, rgba(201, 162, 75, 0.6) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 12% 48%, rgba(255, 255, 255, 0.45) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 21% 12%, rgba(151, 186, 205, 0.58) 0 0.9px, transparent 1.5px),
+    radial-gradient(circle at 39% 44%, rgba(255, 255, 255, 0.42) 0 0.8px, transparent 1.4px),
+    radial-gradient(circle at 48% 88%, rgba(201, 162, 75, 0.46) 0 0.9px, transparent 1.5px),
+    radial-gradient(circle at 61% 12%, rgba(255, 255, 255, 0.52) 0 0.8px, transparent 1.4px),
+    radial-gradient(circle at 72% 82%, rgba(151, 186, 205, 0.52) 0 0.9px, transparent 1.5px),
+    radial-gradient(circle at 86% 44%, rgba(255, 255, 255, 0.5) 0 0.8px, transparent 1.4px),
+    radial-gradient(circle at 96% 61%, rgba(201, 162, 75, 0.44) 0 0.8px, transparent 1.4px);
+  background-size: 100% 100%;
+}
+
+.cosmic-thread-stars {
+  background-image:
+    linear-gradient(28deg, transparent 0 22%, rgba(231, 229, 222, 0.12) 22.12%, transparent 22.38%),
+    linear-gradient(154deg, transparent 0 35%, rgba(201, 162, 75, 0.11) 35.1%, transparent 35.36%),
+    linear-gradient(12deg, transparent 0 72%, rgba(151, 186, 205, 0.08) 72.1%, transparent 72.3%),
+    radial-gradient(circle at 19% 55%, rgba(231, 229, 222, 0.82) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 34% 47%, rgba(201, 162, 75, 0.72) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 58% 32%, rgba(231, 229, 222, 0.64) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 73% 54%, rgba(201, 162, 75, 0.62) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 82% 36%, rgba(151, 186, 205, 0.74) 0 1px, transparent 1.8px);
+}
+
+.cosmic-faint-lines {
+  background-image:
+    linear-gradient(102deg, transparent 0 30%, rgba(231, 229, 222, 0.05) 30.15%, transparent 30.45%),
+    linear-gradient(78deg, transparent 0 58%, rgba(201, 162, 75, 0.045) 58.1%, transparent 58.36%),
+    linear-gradient(146deg, transparent 0 45%, rgba(151, 186, 205, 0.035) 45.1%, transparent 45.34%);
+}
+
+.cosmic-dust {
+  background:
+    conic-gradient(from 28deg, transparent 0deg, rgba(201, 162, 75, 0.12) 48deg, rgba(231, 229, 222, 0.72) 76deg, rgba(91, 112, 171, 0.12) 116deg, transparent 170deg, rgba(231, 229, 222, 0.36) 222deg, transparent 300deg),
+    radial-gradient(circle at center, transparent 0 34%, rgba(231, 229, 222, 0.12) 35%, transparent 49%);
+  filter: blur(0.2px);
+  opacity: 0.88;
+  mask-image: radial-gradient(circle at center, transparent 0 18%, black 28% 68%, transparent 76%);
+}
+
+.cosmic-orbit {
+  border: 1px solid rgba(231, 229, 222, 0.12);
+  box-shadow: inset 0 0 44px rgba(201, 162, 75, 0.03);
+}
+
+.cosmic-orbit-a {
+  transform: rotate(-14deg) scaleX(1.18);
+}
+
+.cosmic-orbit-b {
+  transform: rotate(23deg) scaleX(1.34);
+  border-style: dashed;
+}
+
+.cosmic-line {
+  animation: cosmicPulse 3.8s ease-in-out infinite;
+}
+
+.era-planet {
+  --era-accent: #c9a24b;
+  position: relative;
+  display: block;
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(255, 249, 220, 0.98) 0 9%, var(--era-accent) 18%, rgba(73, 88, 126, 0.72) 44%, rgba(12, 11, 14, 0.88) 69%, transparent 72%),
+    radial-gradient(circle at 50% 50%, var(--era-accent), transparent 64%);
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--era-accent) 82%, white 18%),
+    0 0 44px color-mix(in srgb, var(--era-accent) 48%, transparent),
+    inset -12px -10px 22px rgba(3, 3, 6, 0.76),
+    inset 7px 6px 14px rgba(255, 244, 199, 0.24);
+  transform: rotate(-8deg);
+  transition: transform 300ms ease, filter 300ms ease;
+}
+
+.group:hover .era-planet {
+  filter: brightness(1.12) saturate(1.08);
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.era-planet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4.75rem;
+  height: 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--era-accent) 62%, white 16%);
+  border-left-color: transparent;
+  border-right-color: color-mix(in srgb, var(--era-accent) 42%, transparent);
+  border-radius: 999px;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--era-accent) 32%, transparent);
+  transform: translate(-50%, -50%) rotate(-17deg);
+}
+
+.era-planet::after {
+  content: "";
+  position: absolute;
+  inset: -0.55rem;
+  border-radius: inherit;
+  background:
+    conic-gradient(from 12deg, transparent 0 36deg, rgba(255, 255, 255, 0.82) 54deg, transparent 70deg, transparent 150deg, rgba(201, 162, 75, 0.5) 172deg, transparent 190deg, transparent 360deg);
+  filter: blur(0.4px);
+  mask-image: radial-gradient(circle, transparent 0 36%, black 42% 58%, transparent 66%);
+  opacity: 0.78;
+}
+
+.era-planet-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.78);
+  transform: translate(-50%, -50%);
+}
+
+.era-planet-muted {
+  width: 2rem;
+  height: 2rem;
+  opacity: 0.42;
+  filter: saturate(0.42) brightness(0.78);
+}
+
+.era-planet-muted::before {
+  width: 3.25rem;
+  height: 0.95rem;
+  opacity: 0.52;
+}
+
+.era-planet-muted::after,
+.era-planet-muted .era-planet-dust {
+  opacity: 0.38;
+}
+
+.era-planet-muted .era-planet-core {
+  width: 0.32rem;
+  height: 0.32rem;
+  opacity: 0.6;
+}
+
+.group:hover .era-planet-muted {
+  opacity: 0.82;
+  filter: saturate(0.72) brightness(1);
+}
+
+.era-planet-dust {
+  position: absolute;
+  inset: -0.8rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 16% 45%, rgba(255, 255, 255, 0.86) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 28% 64%, rgba(201, 162, 75, 0.9) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 72% 31%, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 84% 58%, rgba(151, 186, 205, 0.78) 0 1px, transparent 1.8px);
+  opacity: 0.72;
+}
+
+@keyframes cosmicPulse {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cosmic-dust {
+    animation: cosmicDrift 34s linear infinite;
+  }
+
+  .cosmic-orbit-a {
+    animation: orbitBreatheA 12s ease-in-out infinite;
+  }
+
+  .cosmic-orbit-b {
+    animation: orbitBreatheB 15s ease-in-out infinite;
+  }
+
+  .era-planet::after,
+  .era-planet-dust {
+    animation: planetDust 9s linear infinite;
+  }
+}
+
+@keyframes cosmicDrift {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitBreatheA {
+  0%,
+  100% {
+    transform: rotate(-14deg) scaleX(1.18) scale(1);
+  }
+  50% {
+    transform: rotate(-10deg) scaleX(1.24) scale(1.02);
+  }
+}
+
+@keyframes orbitBreatheB {
+  0%,
+  100% {
+    transform: rotate(23deg) scaleX(1.34) scale(1);
+  }
+  50% {
+    transform: rotate(18deg) scaleX(1.4) scale(0.98);
+  }
+}
+
+@keyframes planetDust {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

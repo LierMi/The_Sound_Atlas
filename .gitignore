@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+.vercel
+.DS_Store
+
+# 内部文档（自己看，不推送）
+项目文档/
