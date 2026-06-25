@@ -2,6 +2,7 @@
   "name": "sound-atlas",
   "private": true,
   "version": "0.1.0",
+  "author": "Lier Mi <liermi1996@gmail.com>",
   "type": "module",
   "scripts": {
     "dev": "vite",
