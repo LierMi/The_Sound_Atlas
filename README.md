@@ -168,6 +168,12 @@ npm run build    # 生产构建
 
 ---
 
+## 九、许可 / License
+
+本项目以 **[MIT License](LICENSE)** 开源——欢迎学习、参考与二次创作，使用时保留版权声明即可。
+
+---
+
 <p align="center">
   <b>声音星图 · The Sound Atlas</b><br/>
   在星海里，重新走进每一个时代的声音。<br/>
