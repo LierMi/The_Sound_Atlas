@@ -42,17 +42,17 @@ export default function HomePage({ onSelect, memory, onMemoryChange, onPassport,
       {/* 探索护照（右上角的环境音乐开关在 App 里） */}
       <button
         onClick={onPassport}
-        className="absolute left-5 top-5 z-30 min-h-11 rounded-full border border-amber/25 bg-ink/60 px-5 py-2 text-xs tracking-[0.16em] text-stone-300 backdrop-blur transition-colors hover:border-amber/60 hover:text-amber"
+        className="absolute left-5 top-5 z-30 min-h-11 rounded-full border border-amber/50 bg-ink/80 px-6 py-2.5 text-sm font-medium tracking-[0.14em] text-stone-100 shadow-[0_4px_20px_rgba(0,0,0,0.55)] backdrop-blur transition-colors hover:border-amber hover:bg-amber/15 hover:text-amber"
       >
-        探索护照{stampCount > 0 ? ` · ${stampCount}` : ''}
+        ✦ 探索护照{stampCount > 0 ? ` · ${stampCount}` : ''}
       </button>
 
       {/* 商务合作入口（B 端：品牌/厂牌/文旅/教育共建时代馆） */}
       <button
         onClick={onPartner}
-        className="absolute bottom-5 left-5 z-30 min-h-11 rounded-full border border-amber/25 bg-ink/60 px-5 py-2 text-xs tracking-[0.16em] text-stone-300 backdrop-blur transition-colors hover:border-amber/60 hover:text-amber"
+        className="absolute bottom-5 left-5 z-30 min-h-11 rounded-full border border-amber/50 bg-ink/80 px-6 py-2.5 text-sm font-medium tracking-[0.14em] text-stone-100 shadow-[0_4px_20px_rgba(0,0,0,0.55)] backdrop-blur transition-colors hover:border-amber hover:bg-amber/15 hover:text-amber"
       >
-        商务合作
+        ◈ 商务合作
       </button>
 
       {/* 顶部 HUD：标题 + 记忆输入 */}
@@ -67,7 +67,7 @@ export default function HomePage({ onSelect, memory, onMemoryChange, onPassport,
           你想去哪个音乐时空？
         </h1>
         <p
-          className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-stone-400 fade-up"
+          className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-stone-300 fade-up md:text-lg"
           style={{ animationDelay: '0.2s' }}
         >
           拖动环视星海，点亮一颗发光坐标进入展厅。
@@ -86,12 +86,20 @@ export default function HomePage({ onSelect, memory, onMemoryChange, onPassport,
             className="min-h-11 w-full rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-center text-sm text-stone-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur placeholder:text-stone-500 focus:border-amber/50 focus:outline-none"
           />
           {memory.trim() ? (
-            <p className="mt-2 text-xs tracking-wide text-amber/85">
-              ✓ 已记下 · 进入后 AI 馆长会把它写成只属于你的「私人回声」
-            </p>
+            <div className="mt-3 flex flex-col items-center gap-2 fade-up">
+              <span className="inline-flex items-center gap-2 rounded-full border border-amber/60 bg-amber/10 px-4 py-2 text-sm font-medium text-amber">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber text-xs font-bold text-ink">
+                  ✓
+                </span>
+                已记下 · 进馆后将为你写成专属「私人回声」
+              </span>
+              <span className="text-sm font-medium tracking-wide text-amber/90">
+                下一步 ↓ 点亮下方星海里的一颗发光坐标，进入展厅
+              </span>
+            </div>
           ) : (
-            <p className="mt-2 text-[11px] tracking-wide text-stone-500">
-              ✦ 可选 · 写下它，让这趟旅程为你一个人定制
+            <p className="mt-3 text-sm tracking-wide text-stone-300">
+              ✦ 可选 · 写一句记忆，让这趟旅程为你一个人定制
             </p>
           )}
         </div>

@@ -458,7 +458,7 @@ function UnlockPlaylist({ era }) {
       <div className="flex flex-col gap-5 overflow-hidden rounded-2xl border border-amber/25 bg-gradient-to-br from-amber/[0.08] to-transparent p-6 md:flex-row md:items-center md:justify-between">
         <div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber/15 px-3 py-1 text-[11px] tracking-[0.18em] text-amber">
-            ◈ 绿钻会员
+            ◈ 时空会员
           </span>
           <h3 className="mt-3 font-serif text-2xl text-stone-100">
             解锁《{era.title}》完整歌单
@@ -486,13 +486,13 @@ function UnlockPlaylist({ era }) {
               onClick={(e) => e.stopPropagation()}
             >
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber/15 px-3 py-1 text-[11px] tracking-[0.18em] text-amber">
-                ◈ 绿钻会员
+                ◈ 时空会员
               </span>
               <h4 className="mt-4 font-serif text-2xl text-stone-100">
                 畅听《{era.title}》完整歌单
               </h4>
               <p className="mt-3 text-sm leading-relaxed text-stone-400">
-                开通绿钻会员，在 QQ 音乐 · 酷狗 · 酷我畅听本时代 {count} 首完整原声，并解锁全部时代展馆歌单。
+                开通时空会员，在 QQ 音乐 · 酷狗 · 酷我畅听本时代 {count} 首完整原声，并解锁全部时代展馆歌单。
               </p>
               <div className="mt-6 flex items-center justify-center gap-3">
                 <button
