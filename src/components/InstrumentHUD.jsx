@@ -9,7 +9,7 @@ function Bezel() {
   return (
     <svg
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-      style={{ width: '94vmin', height: '94vmin' }}
+      style={{ width: '120vmin', height: '120vmin' }}
       viewBox="0 0 1000 1000"
       fill="none"
     >

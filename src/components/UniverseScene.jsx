@@ -283,8 +283,9 @@ function Scene({ onSelect, onEnterStart }) {
       return
     }
     // 否则：旋转星系，把这颗拉到最前方
+    // 绕 Y 轴旋转后世界角 = baseAngle − rotation.y，故目标 rotation.y = baseAngle − FRONT
     const cur = galaxyRef.current ? galaxyRef.current.rotation.y : 0
-    let d = FRONT - node.baseAngle - cur
+    let d = node.baseAngle - FRONT - cur
     d = ((d + Math.PI) % (Math.PI * 2)) - Math.PI // 取最短路径
     targetRot.current = cur + d
     setFrontId(node.era.id)

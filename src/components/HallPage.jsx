@@ -662,12 +662,12 @@ export default function HallPage({ era, onHome, onStamp, onPassport, stampCount 
 
         {/* 馆长手记 */}
         <section className="mt-14 max-w-2xl fade-up" style={{ animationDelay: '0.15s' }}>
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-8 flex items-center gap-3">
             <span className="h-px w-8 bg-amber/60" />
             <span className="text-xs uppercase tracking-[0.3em] text-amber/80">AI馆长手记</span>
           </div>
           <div className="relative pl-7">
-            <span className="pointer-events-none absolute -left-1 -top-5 select-none font-serif text-6xl leading-none text-amber/25">
+            <span className="pointer-events-none absolute -left-1 -top-3 select-none font-serif text-6xl leading-none text-amber/25">
               “
             </span>
             <p className="font-serif text-lg italic leading-loose text-stone-300 md:text-xl">

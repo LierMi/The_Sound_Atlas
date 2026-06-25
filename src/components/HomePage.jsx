@@ -6,6 +6,7 @@ import InstrumentHUD from './InstrumentHUD'
 export default function HomePage({ onSelect, memory, onMemoryChange, onPassport, onPartner, stampCount = 0 }) {
   const openCount = eras.filter((e) => e.status === 'open').length
   const [enterAccent, setEnterAccent] = useState(null) // 俯冲进入时的转场色
+  const [memConfirmed, setMemConfirmed] = useState(false) // 记忆是否已确认（输入完再"已记下"）
 
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-ink">
@@ -77,15 +78,43 @@ export default function HomePage({ onSelect, memory, onMemoryChange, onPassport,
           className="pointer-events-auto mx-auto mt-5 max-w-xl fade-up"
           style={{ animationDelay: '0.3s' }}
         >
-          <input
-            type="text"
-            value={memory}
-            onChange={(e) => onMemoryChange(e.target.value)}
-            maxLength={60}
-            placeholder="写一句你和音乐的记忆，AI 馆长会为你定制这座展厅…"
-            className="min-h-11 w-full rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-center text-sm text-stone-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur placeholder:text-stone-500 focus:border-amber/50 focus:outline-none"
-          />
-          {memory.trim() ? (
+          <div className="relative">
+            <input
+              type="text"
+              value={memory}
+              onChange={(e) => {
+                onMemoryChange(e.target.value)
+                if (memConfirmed) setMemConfirmed(false) // 重新编辑 → 取消已确认
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && memory.trim()) {
+                  setMemConfirmed(true)
+                  e.currentTarget.blur()
+                }
+              }}
+              maxLength={60}
+              placeholder="写一句你和音乐的记忆，写完按回车确认…"
+              className="min-h-11 w-full rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 pr-12 text-center text-sm text-stone-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur placeholder:text-stone-500 focus:border-amber/50 focus:outline-none"
+            />
+            {memory.trim() && (
+              <button
+                onClick={() => setMemConfirmed(true)}
+                aria-label="确认记忆"
+                className={`absolute right-1.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-sm font-bold transition-colors ${
+                  memConfirmed
+                    ? 'bg-amber text-ink'
+                    : 'border border-amber/50 text-amber hover:bg-amber/15'
+                }`}
+              >
+                ✓
+              </button>
+            )}
+          </div>
+          {!memory.trim() ? (
+            <p className="mt-3 text-sm tracking-wide text-stone-300">
+              ✦ 可选 · 写一句记忆，让这趟旅程为你一个人定制
+            </p>
+          ) : memConfirmed ? (
             <div className="mt-3 flex flex-col items-center gap-2 fade-up">
               <span className="inline-flex items-center gap-2 rounded-full border border-amber/60 bg-amber/10 px-4 py-2 text-sm font-medium text-amber">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber text-xs font-bold text-ink">
@@ -98,8 +127,8 @@ export default function HomePage({ onSelect, memory, onMemoryChange, onPassport,
               </span>
             </div>
           ) : (
-            <p className="mt-3 text-sm tracking-wide text-stone-300">
-              ✦ 可选 · 写一句记忆，让这趟旅程为你一个人定制
+            <p className="mt-3 text-sm tracking-wide text-amber/80">
+              写完后按回车，或点右侧 ✓ 确认
             </p>
           )}
         </div>
